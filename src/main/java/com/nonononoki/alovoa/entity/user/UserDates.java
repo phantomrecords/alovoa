@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -29,6 +30,7 @@ public class UserDates {
 	
 	@JsonIgnore
 	@OneToOne
+	@JoinColumn(name = "user_id") // Explicitly set the join column
 	private User user;
 	
 	@Column(nullable = false)

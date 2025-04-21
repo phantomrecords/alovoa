@@ -21,7 +21,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     String SEARCH_BASE_QUERY = "WHERE u.disabled = FALSE AND u.admin = FALSE AND u.confirmed = TRUE AND u.intention IS NOT NULL AND "
             + "u.locationLatitude IS NOT NULL AND u.locationLongitude IS NOT NULL "
             + "AND u.profilePicture IS NOT NULL AND :preferedGender MEMBER OF u.preferedGenders "
-            + "AND TIMESTAMPDIFF(YEAR, u.dates.dateOfBirth, CURDATE()) + u.preferedMaxAge >= :age AND TIMESTAMPDIFF(YEAR, u.dates.dateOfBirth, CURDATE()) + u.preferedMinAge <= :age AND u.dates.dateOfBirth >= :minDate AND u.dates.dateOfBirth <= :maxDate "
+            + "AND DATE_PART('year', AGE(u.dates.dateOfBirth)) + u.preferedMaxAge >= :age AND DATE_PART('year', AGE(u.dates.dateOfBirth)) + u.preferedMinAge <= :age AND u.dates.dateOfBirth >= :minDate AND u.dates.dateOfBirth <= :maxDate "
             + "AND u.id NOT IN (:likeIds) AND u.id NOT IN (:likeIds) AND u.id NOT IN (:hideIds) "
             + "AND u.id NOT IN (:blockIds) "
             + "AND u.id NOT IN (:blockedByIds) "
